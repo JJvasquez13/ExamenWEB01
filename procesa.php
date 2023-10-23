@@ -371,6 +371,65 @@ function determinarValor($valor)
 
                     echo "</tbody></table>";
                 }
+
+                echo "<br>";
+
+                echo "<div class='row'>";
+                echo "<div class='col-md-6'>";
+                echo "<h4>Género y Provincia " . $_FILES['txtArchi1']['name'] . "</h4>";
+                echo "<div id='chart1'></div>";
+                echo "</div>";
+                echo "<div class='col-md-6'>";
+                echo "<h4>Género y Provincia " . $_FILES['txtArchi2']['name'] . "</h4>";
+                echo "<div id='chart2'></div>";
+                echo "</div>";
+                echo "</div>";
+
+                echo "<script type='text/javascript' src='https://www.google.com/jsapi'></script>";
+                echo "<script type='text/javascript'>";
+
+                echo "google.load('visualization', '1', {packages:['corechart']});";
+                echo "google.setOnLoadCallback(drawCharts);";
+
+                echo "function drawCharts() {";
+
+                // Datos del Archivo 1
+                echo "var data1 = new google.visualization.DataTable();";
+                echo "data1.addColumn('string', 'Provincia');";
+                echo "data1.addColumn('number', 'Hombres');";
+                echo "data1.addColumn('number', 'Mujeres');";
+                echo "data1.addRows([";
+                foreach ($provincias as $provincia) {
+                    echo "['" . $provincia . "', " . $resumen['M'][$provincia] . ", " . $resumen['F'][$provincia] . "],";
+                }
+                echo "]);";
+
+                // Datos del Archivo 2
+                echo "var data2 = new google.visualization.DataTable();";
+                echo "data2.addColumn('string', 'Provincia');";
+                echo "data2.addColumn('number', 'Hombres');";
+                echo "data2.addColumn('number', 'Mujeres');";
+                echo "data2.addRows([";
+                foreach ($provincias as $provincia) {
+                    echo "['" . $provincia . "', " . $resumen2['M'][$provincia] . ", " . $resumen2['F'][$provincia] . "],";
+                }
+                echo "]);";
+
+                echo "var options = {";
+                echo "title: 'Género y Provincia',";
+                echo "width: 600,";
+                echo "height: 500,";
+                echo "hAxis: { title: 'Provincia' },";
+                echo "vAxis: { title: 'Cantidad' }";
+                echo "};";
+
+                echo "var chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));";
+                echo "chart1.draw(data1, options);";
+
+                echo "var chart2 = new google.visualization.ColumnChart(document.getElementById('chart2'));";
+                echo "chart2.draw(data2, options);";
+                echo "}";
+                echo "</script>";
             }
             ?>
         </div>
