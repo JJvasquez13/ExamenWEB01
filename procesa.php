@@ -416,7 +416,7 @@ function determinarValor($valor)
                 echo "]);";
 
                 echo "var options = {";
-                echo "title: 'Género y Provincia',";
+                echo "title: 'Cantidad de Personas por Genero en cada Provincia',";
                 echo "width: 600,";
                 echo "height: 500,";
                 echo "hAxis: { title: 'Provincia' },";
